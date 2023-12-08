@@ -1,0 +1,21 @@
+﻿<Project>
+    <PropertyGroup>
+        
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="**\*.xaml" />
+        <EmbeddedResource Include="**\*.xaml">
+            <DependentUpon Condition="Exists('%(Filename).cs')">%(Filename).cs</DependentUpon>
+        </EmbeddedResource>
+    </ItemGroup>
+    
+    <Target Name="IncludeXamlFilesAsContent">
+        <ItemGroup>
+            <EmbeddedResource Include="**\*.xaml">
+                <Generator>MSBuild:Compile</Generator>
+            </EmbeddedResource>
+        </ItemGroup>
+        <Message Text="Applied MSBuild Target to define *.xaml items as EmbeddedResource" />
+    </Target>
+</Project>
