@@ -147,7 +147,14 @@ namespace Alex
 
 			DeviceManager.PreparingDeviceSettings += (sender, args) =>
 			{
-				Gpu = args.GraphicsDeviceInformation.Adapter.Description;
+				try
+				{
+                    Gpu = args.GraphicsDeviceInformation.Adapter.Description;
+				}
+				catch (Exception e)
+				{
+                    Console.WriteLine("Couldn't set GPU based on: args.GraphicsDeviceInformation.Adapter.Description");
+				}
 
 				args.GraphicsDeviceInformation.PresentationParameters.DepthStencilFormat = DepthFormat.Depth24Stencil8;
 
